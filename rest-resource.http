@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/resources
+Content-Type: application/json
+
+{
+    "name": "User service",
+    "url": "http://localhost:3000",
+    "checkFrequency": 86400000
+}
