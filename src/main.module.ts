@@ -1,8 +1,7 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppController } from './app/app.controller';
 import { Resource } from './resource/entities/rosource.entity';
 import { ResourceModule } from './resource/resource.module';
 
@@ -18,7 +17,6 @@ import { ResourceModule } from './resource/resource.module';
   ],
   controllers: [AppController],
   providers: [
-    AppService,
     {
       provide: APP_PIPE,
       useValue: new ValidationPipe({
@@ -27,4 +25,4 @@ import { ResourceModule } from './resource/resource.module';
     },
   ],
 })
-export class AppModule {}
+export class MainModule {}
