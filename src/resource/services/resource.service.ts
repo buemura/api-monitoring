@@ -1,12 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
+import axios from 'axios';
 import { Like, Repository } from 'typeorm';
 import { CreateResourceDto } from '../dtos/create-resource.dto';
 import { GetFilteredResources } from '../dtos/get-filtered-resources.dto';
 import { UpdateResourceDto } from '../dtos/update-resource.dto';
 import { Resource } from '../entities/rosource.entity';
-import { Cron, CronExpression } from '@nestjs/schedule';
-import axios from 'axios';
+import { getDateDiff } from '../../utils/date';
 
 @Injectable()
 export class ResourceService {
@@ -64,10 +65,7 @@ export class ResourceService {
     const apis = await this.repository.find();
 
     const promises = apis.map(async (api) => {
-      const nowInTimestamp = Date.parse(new Date().toString());
-      const updatedAtInTimestamp = Date.parse(api.updatedAt.toString());
-      const diff = nowInTimestamp - updatedAtInTimestamp;
-
+      const diff = getDateDiff(new Date(), api.updatedAt);
       if (diff < api.checkFrequency) {
         console.log(`Skipping API ${api.id}`);
         return;
