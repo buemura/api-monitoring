@@ -18,22 +18,22 @@ export class ResourceController {
   constructor(private readonly resourceService: ResourceService) {}
 
   @Get()
-  getResources(@Query() query: GetFilteredResources) {
+  async getResources(@Query() query: GetFilteredResources) {
     return this.resourceService.getResources(query);
   }
 
   @Get(':resourceId')
-  getResourceById(@Param('resourceId') resourceId: string) {
+  async getResourceById(@Param('resourceId') resourceId: string) {
     return this.resourceService.getById(resourceId);
   }
 
   @Post()
-  addResource(@Body() body: CreateResourceDto) {
+  async addResource(@Body() body: CreateResourceDto) {
     return this.resourceService.createResource(body);
   }
 
   @Patch(':resourceId')
-  updateResource(
+  async updateResource(
     @Param('resourceId') resourceId: string,
     @Body() body: UpdateResourceDto,
   ) {
@@ -41,7 +41,7 @@ export class ResourceController {
   }
 
   @Delete(':resourceId')
-  removeUser(@Param('resourceId') resourceId: string) {
+  async removeUser(@Param('resourceId') resourceId: string) {
     return this.resourceService.remove(resourceId);
   }
 }

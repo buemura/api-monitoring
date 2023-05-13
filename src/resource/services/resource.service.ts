@@ -15,7 +15,7 @@ export class ResourceService {
     private readonly repository: Repository<Resource>,
   ) {}
 
-  getResources(query: GetFilteredResources) {
+  async getResources(query: GetFilteredResources) {
     if (query.name) {
       return this.repository.find({
         where: {
@@ -27,15 +27,15 @@ export class ResourceService {
     return this.repository.find();
   }
 
-  getById(id: string) {
+  async getById(id: string) {
     return this.repository.findOne({ where: { id } });
   }
 
-  getByName(name: string) {
+  async getByName(name: string) {
     return this.repository.find({ where: { name } });
   }
 
-  createResource(body: CreateResourceDto) {
+  async createResource(body: CreateResourceDto) {
     const resource = this.repository.create(body);
     return this.repository.save(resource);
   }
