@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app/app.controller';
 import { Resource } from './resource/entities/rosource.entity';
 import { ResourceModule } from './resource/resource.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ResourceModule } from './resource/resource.module';
       entities: [Resource],
       synchronize: true,
     }),
+    ScheduleModule.forRoot(),
     ResourceModule,
   ],
   controllers: [AppController],

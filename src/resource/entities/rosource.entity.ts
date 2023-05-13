@@ -27,6 +27,9 @@ export class Resource {
   checkFrequency: number;
 
   @Column({ nullable: true })
+  status: string;
+
+  @Column({ nullable: true })
   lastCheck: Date;
 
   @CreateDateColumn()
