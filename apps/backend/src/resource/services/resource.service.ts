@@ -74,8 +74,10 @@ export class ResourceService {
           throw new Error();
         }
         dataToSave.status = 'Up';
+        console.log(`API ${api.id} is UP`);
       } catch (error) {
         dataToSave.status = 'Down';
+        console.log(`API ${api.id} is DOWN`);
       }
 
       await this.updateResource(api.id, dataToSave);
