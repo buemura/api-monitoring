@@ -1,30 +1,23 @@
-import { useEffect, useState } from "react";
+import FetchFailError from "../Common/Errors/FetchFailError";
+import Loader from "../Common/Loaders";
 import NoResources from "./NoResources";
-import ResourceItem from "./ResourceItem";
-import { resourcesService } from "../../services/http";
-import { Resource } from "../../types/resource";
+import ResourceList from "./ResourceList";
+import { useResourcesFetch } from "./hooks/useResourcesFetch";
 
 export default function Resources() {
-  const [resources, setResources] = useState<Resource[]>([]);
+  const { isLoading, hasError, resources } = useResourcesFetch();
 
-  const fetchResources = async () => {
-    const result = await resourcesService.getAll();
-    setResources(result);
-  };
+  if (isLoading) {
+    return <Loader />;
+  }
 
-  useEffect(() => {
-    fetchResources();
-  }, []);
+  if (hasError) {
+    return <FetchFailError />;
+  }
 
   if (!resources.length) {
     return <NoResources />;
   }
 
-  return (
-    <div className="p-4">
-      {resources.map((resource) => (
-        <ResourceItem key={resource.id} resource={resource} />
-      ))}
-    </div>
-  );
+  return <ResourceList resources={resources} />;
 }
