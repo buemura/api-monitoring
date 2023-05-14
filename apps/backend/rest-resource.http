@@ -3,7 +3,7 @@ GET http://localhost:8080/api/resources
 
 
 ### Get resources by name
-GET http://localhost:8080/api/resources?name=User%20ser
+GET http://localhost:8080/api/resources?name=User%20re
 
 
 ### Create resource
