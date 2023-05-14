@@ -50,39 +50,4 @@ export class ResourceService {
 
     return this.resourceRepository.remove(resource);
   }
-
-  @Cron(CronExpression.EVERY_10_SECONDS)
-  async checkResource() {
-    const apis = await this.resourceRepository.findAll();
-
-    const promises = apis.map(async (api) => {
-      const diff = getDateDiff(new Date(), api.updatedAt);
-      if (diff < api.checkFrequency) {
-        console.log(`Skipping API ${api.id}`);
-        return;
-      }
-
-      console.log(`Checking API ${api.id}`);
-      const dataToSave = {
-        ...api,
-        lastCheck: new Date(),
-      };
-
-      try {
-        const { status } = await axios.get(api.url);
-        if (status !== 200) {
-          throw new Error();
-        }
-        dataToSave.status = 'Up';
-        console.log(`API ${api.id} is UP`);
-      } catch (error) {
-        dataToSave.status = 'Down';
-        console.log(`API ${api.id} is DOWN`);
-      }
-
-      await this.updateResource(api.id, dataToSave);
-    });
-
-    await Promise.all(promises);
-  }
 }

@@ -12,10 +12,14 @@ import { CreateResourceDto } from '../dtos/create-resource.dto';
 import { GetFilteredResources } from '../dtos/get-filtered-resources.dto';
 import { UpdateResourceDto } from '../dtos/update-resource.dto';
 import { ResourceService } from '../services/resource.service';
+import { ResourceCheckService } from '../services/resource-check.service';
 
 @Controller('resources')
 export class ResourceController {
-  constructor(private readonly resourceService: ResourceService) {}
+  constructor(
+    private readonly resourceService: ResourceService,
+    private readonly resourceCheckService: ResourceCheckService,
+  ) {}
 
   @Get()
   async getResources(@Query() query: GetFilteredResources) {
@@ -43,5 +47,10 @@ export class ResourceController {
   @Delete(':resourceId')
   async removeUser(@Param('resourceId') resourceId: string) {
     return this.resourceService.remove(resourceId);
+  }
+
+  @Get(':resourceId/check')
+  async checkResource(@Param('resourceId') resourceId: string) {
+    return this.resourceCheckService.checkResource(resourceId);
   }
 }
