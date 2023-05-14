@@ -72,16 +72,22 @@ export class ResourceService {
       }
 
       console.log(`Checking API ${api.id}`);
-      const { status, data } = await axios.get(api.url);
-      if (status === 200) {
-        const dataToSave = {
-          ...api,
-          status: data,
-          lastCheck: new Date(),
-        };
+      const dataToSave = {
+        ...api,
+        lastCheck: new Date(),
+      };
 
-        await this.updateResource(api.id, dataToSave);
+      try {
+        const { status } = await axios.get(api.url);
+        if (status !== 200) {
+          throw new Error();
+        }
+        dataToSave.status = 'Up';
+      } catch (error) {
+        dataToSave.status = 'Down';
       }
+
+      await this.updateResource(api.id, dataToSave);
     });
 
     await Promise.all(promises);
