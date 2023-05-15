@@ -13,7 +13,13 @@ import { GetFilteredResources } from '../dtos/get-filtered-resources.dto';
 import { UpdateResourceDto } from '../dtos/update-resource.dto';
 import { ResourcesService } from '../services/resources.service';
 import { ResourcesCheckService } from '../services/resources-check.service';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Resource } from '../entities/rosource.entity';
 
 @ApiTags('Resources')
@@ -25,6 +31,7 @@ export class ResourcesController {
   ) {}
 
   @ApiOkResponse({ type: Resource, isArray: true })
+  @ApiQuery({ name: 'name', required: false })
   @Get()
   async getResources(@Query() query: GetFilteredResources) {
     return this.resourcesService.getResources(query);
@@ -43,6 +50,7 @@ export class ResourcesController {
   }
 
   @ApiOkResponse({ type: Resource })
+  @ApiNotFoundResponse()
   @Patch(':resourceId')
   async updateResource(
     @Param('resourceId') resourceId: string,
@@ -52,6 +60,7 @@ export class ResourcesController {
   }
 
   @ApiOkResponse({ type: Resource })
+  @ApiNotFoundResponse()
   @Delete(':resourceId')
   async removeUser(@Param('resourceId') resourceId: string) {
     return this.resourcesService.remove(resourceId);
