@@ -11,29 +11,29 @@ import {
 import { CreateResourceDto } from '../dtos/create-resource.dto';
 import { GetFilteredResources } from '../dtos/get-filtered-resources.dto';
 import { UpdateResourceDto } from '../dtos/update-resource.dto';
-import { ResourceService } from '../services/resource.service';
-import { ResourceCheckService } from '../services/resource-check.service';
+import { ResourcesService } from '../services/resources.service';
+import { ResourcesCheckService } from '../services/resources-check.service';
 
 @Controller('resources')
-export class ResourceController {
+export class ResourcesController {
   constructor(
-    private readonly resourceService: ResourceService,
-    private readonly resourceCheckService: ResourceCheckService,
+    private readonly resourcesService: ResourcesService,
+    private readonly resourcesCheckService: ResourcesCheckService,
   ) {}
 
   @Get()
   async getResources(@Query() query: GetFilteredResources) {
-    return this.resourceService.getResources(query);
+    return this.resourcesService.getResources(query);
   }
 
   @Get(':resourceId')
   async getResourceById(@Param('resourceId') resourceId: string) {
-    return this.resourceService.getById(resourceId);
+    return this.resourcesService.getById(resourceId);
   }
 
   @Post()
   async addResource(@Body() body: CreateResourceDto) {
-    return this.resourceService.createResource(body);
+    return this.resourcesService.createResource(body);
   }
 
   @Patch(':resourceId')
@@ -41,16 +41,16 @@ export class ResourceController {
     @Param('resourceId') resourceId: string,
     @Body() body: UpdateResourceDto,
   ) {
-    return this.resourceService.updateResource(resourceId, body);
+    return this.resourcesService.updateResource(resourceId, body);
   }
 
   @Delete(':resourceId')
   async removeUser(@Param('resourceId') resourceId: string) {
-    return this.resourceService.remove(resourceId);
+    return this.resourcesService.remove(resourceId);
   }
 
   @Get(':resourceId/check')
   async checkResource(@Param('resourceId') resourceId: string) {
-    return this.resourceCheckService.checkResource(resourceId);
+    return this.resourcesCheckService.checkResource(resourceId);
   }
 }

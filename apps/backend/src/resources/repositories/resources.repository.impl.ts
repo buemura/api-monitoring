@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateResourceDto } from '../dtos/create-resource.dto';
 
 @Injectable()
-export class ResourceRepositoryImpl {
+export class ResourcesRepositoryImpl {
   constructor(
     @InjectRepository(Resource)
     private readonly repository: Repository<Resource>,

@@ -1,24 +1,24 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ResourceService } from './resource.service';
-import { ResourceRepositoryImpl } from '../repositories/resource.repository.impl';
+import { ResourcesService } from './resources.service';
+import { ResourcesRepositoryImpl } from '../repositories/resources.repository.impl';
 import { InMemoryResourceRepository } from '../../../test/__mocks__/repositories/in-memory/resource.repository';
 import { resourcesMock } from '../../../test/__mocks__/data/resources';
 
-describe('ResourceService', () => {
-  let service: ResourceService;
+describe('ResourcesService', () => {
+  let service: ResourcesService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        ResourceService,
+        ResourcesService,
         {
-          provide: ResourceRepositoryImpl,
+          provide: ResourcesRepositoryImpl,
           useClass: InMemoryResourceRepository,
         },
       ],
     }).compile();
 
-    service = module.get<ResourceService>(ResourceService);
+    service = module.get<ResourcesService>(ResourcesService);
   });
 
   it('should be defined', () => {

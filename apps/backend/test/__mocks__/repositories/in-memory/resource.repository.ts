@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
-import { CreateResourceDto } from '../../../../src/resource/dtos/create-resource.dto';
-import { Resource } from '../../../../src/resource/entities/rosource.entity';
+import { CreateResourceDto } from '../../../../src/resources/dtos/create-resource.dto';
+import { Resource } from '../../../../src/resources/entities/rosource.entity';
 import { resourcesMock } from '../../data/resources';
 
 export class InMemoryResourceRepository {

@@ -1,13 +1,13 @@
-import { Cron, CronExpression } from '@nestjs/schedule';
-import { ResourceRepositoryImpl } from '../repositories/resource.repository.impl';
-import { getDateDiff } from '../../utils/date';
 import axios from 'axios';
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { ResourcesRepositoryImpl } from '../repositories/resources.repository.impl';
+import { getDateDiff } from '../../utils/date';
 import { Resource } from '../entities/rosource.entity';
 
 @Injectable()
-export class ResourceCheckService {
-  constructor(private readonly resourceRepository: ResourceRepositoryImpl) {}
+export class ResourcesCheckService {
+  constructor(private readonly resourcesRepository: ResourcesRepositoryImpl) {}
 
   private async checkAndUpdate(api: Resource) {
     console.log(`Checking API ${api.id}`);
@@ -29,7 +29,7 @@ export class ResourceCheckService {
     }
 
     Object.assign(api, dataToSave);
-    return this.resourceRepository.save(api);
+    return this.resourcesRepository.save(api);
   }
 
   private async validateAndUpdate(api: Resource) {
@@ -42,7 +42,7 @@ export class ResourceCheckService {
   }
 
   async checkResource(id: string) {
-    const api = await this.resourceRepository.findById(id);
+    const api = await this.resourcesRepository.findById(id);
     if (!api) {
       throw new BadRequestException('API with provided id does not exists');
     }
@@ -51,7 +51,7 @@ export class ResourceCheckService {
 
   @Cron(CronExpression.EVERY_10_SECONDS)
   async checkResourcesInBackground() {
-    const apis = await this.resourceRepository.findAll();
+    const apis = await this.resourcesRepository.findAll();
     const promises = apis.map(async (api) => {
       await this.validateAndUpdate(api);
     });
