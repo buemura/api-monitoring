@@ -19,5 +19,5 @@ export default function useWebsocket() {
     };
   }, []);
 
-  return { refresh, resourceUpdated };
+  return { refresh, setRefresh, resourceUpdated };
 }

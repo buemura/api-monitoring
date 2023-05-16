@@ -1,21 +1,29 @@
-import { Resource } from "../../types/resource";
-import { formatDate, milisecondsToSeconds } from "../../utils/date-time";
-import upIcon from "../../assets/up.png";
-import downIcon from "../../assets/down.png";
-import { resourcesService } from "../../services/http";
-import useWebsocket from "../../hooks/useWebsocket";
-import Timer from "../Common/Timer";
+import { Resource } from "../../../types/resource";
+import { formatDate, milisecondsToSeconds } from "../../../utils/date-time";
+import upIcon from "../../../assets/up.png";
+import downIcon from "../../../assets/down.png";
+import { resourcesService } from "../../../services/http";
+import useWebsocket from "../../../hooks/useWebsocket";
+import Timer from "../../Common/Timer";
+import { useEffect, useState } from "react";
 
 type ResourceItemProps = {
   resource: Resource;
 };
 
-export default function ResourceItem({ resource }: ResourceItemProps) {
-  const { refresh } = useWebsocket();
+export default function ResourceItem({ resource: props }: ResourceItemProps) {
+  const { refresh, setRefresh } = useWebsocket();
+  const [resource, setResource] = useState(props);
 
-  if (refresh) {
-    document.location.reload();
-  }
+  useEffect(() => {
+    const fetchResource = async () => {
+      const res = await resourcesService.getById(resource.id);
+      setResource(res);
+    };
+
+    fetchResource();
+    setRefresh(false);
+  }, [refresh]);
 
   const handleCheckResource = async () => {
     await resourcesService.checkResource(resource.id);

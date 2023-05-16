@@ -6,6 +6,7 @@
     "turbo": "^1.9.6"
   },
   "scripts": {
+    "test": "turbo run test",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "start": "node apps/backend/dist/main",

@@ -1,5 +1,5 @@
-import FetchFailError from "../Common/Errors/FetchFailError";
-import Loader from "../Common/Loaders";
+import FetchFailError from "../../Common/Errors/FetchFailError";
+import Loader from "../../Common/Loaders";
 import NoResources from "./NoResources";
 import ResourceList from "./ResourceList";
 import { useResourcesFetch } from "./hooks/useResourcesFetch";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { resourcesService } from "../../../services/http";
-import { Resource } from "../../../types/resource";
+import { resourcesService } from "../../../../services/http";
+import { Resource } from "../../../../types/resource";
 
 export function useResourcesFetch() {
   const [isLoading, setIsLoading] = useState(false);

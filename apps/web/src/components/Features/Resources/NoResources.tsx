@@ -1,4 +1,4 @@
-import questionIcon from "../../assets/question.png";
+import questionIcon from "../../../assets/question.png";
 
 export default function NoResources() {
   return (
