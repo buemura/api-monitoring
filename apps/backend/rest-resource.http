@@ -11,7 +11,7 @@ POST http://localhost:8080/api/resources
 Content-Type: application/json
 
 {
-    "name": "Order registration",
+    "name": "Order service",
     "url": "http://localhost:3002/api/health",
     "checkFrequency": 30000
 }
@@ -31,4 +31,4 @@ Content-Type: application/json
 
 
 ### Delete resources by name
-DELETE http://localhost:8080/api/resources/a3e22e03-0da3-493b-87a7-ff1bf858b4e7
+DELETE http://localhost:8080/api/resources/10ce842a-b359-44b0-bde1-2cd72e370c09

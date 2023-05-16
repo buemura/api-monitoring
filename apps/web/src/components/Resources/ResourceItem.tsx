@@ -3,12 +3,19 @@ import { formatDate, milisecondsToSeconds } from "../../utils/date-time";
 import upIcon from "../../assets/up.png";
 import downIcon from "../../assets/down.png";
 import { resourcesService } from "../../services/http";
+import useWebsocket from "../../hooks/useWebsocket";
 
 type ResourceItemProps = {
   resource: Resource;
 };
 
 export default function ResourceItem({ resource }: ResourceItemProps) {
+  const { refresh } = useWebsocket();
+
+  if (refresh) {
+    document.location.reload();
+  }
+
   const handleCheckResource = async () => {
     await resourcesService.checkResource(resource.id);
   };

@@ -4,10 +4,14 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { ResourcesRepositoryImpl } from '../repositories/resources.repository.impl';
 import { getDateDiff } from '../../utils/date';
 import { Resource } from '../entities/rosource.entity';
+import { WebsocketService } from '../../websocket/websocket.service';
 
 @Injectable()
 export class ResourcesCheckService {
-  constructor(private readonly resourcesRepository: ResourcesRepositoryImpl) {}
+  constructor(
+    private readonly resourcesRepository: ResourcesRepositoryImpl,
+    private readonly websocketProvider: WebsocketService,
+  ) {}
 
   private async checkAndUpdate(api: Resource) {
     console.log(`Checking API ${api.id}`);
@@ -29,7 +33,9 @@ export class ResourcesCheckService {
     }
 
     Object.assign(api, dataToSave);
-    return this.resourcesRepository.save(api);
+    const result = await this.resourcesRepository.save(api);
+    this.websocketProvider.handleEvent('resourceUpdate', result);
+    return result;
   }
 
   private async validateAndUpdate(api: Resource) {
