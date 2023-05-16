@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ResourcesController } from './resources.controller';
-import { ResourcesService } from '../services/resources.service';
 import { ResourcesCheckService } from '../services/resources-check.service';
+import { ResourcesService } from '../services/resources.service';
+import { ResourcesController } from './resources.controller';
 
 describe('ResourceController', () => {
   let controller: ResourcesController;
@@ -15,7 +15,7 @@ describe('ResourceController', () => {
       getByName: jest.fn().mockReturnValue([]),
       createResource: jest.fn().mockReturnValue({}),
       updateResource: jest.fn().mockReturnValue({}),
-      remove: jest.fn().mockReturnValue({}),
+      removeResource: jest.fn().mockReturnValue({}),
     };
 
     resourcesCheckServiceMock = {
@@ -28,6 +28,10 @@ describe('ResourceController', () => {
         {
           provide: ResourcesService,
           useValue: resourcesServiceMock,
+        },
+        {
+          provide: ResourcesCheckService,
+          useValue: resourcesCheckServiceMock,
         },
       ],
     }).compile();

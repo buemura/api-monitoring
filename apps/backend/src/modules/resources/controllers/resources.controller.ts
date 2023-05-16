@@ -8,11 +8,6 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { CreateResourceDto } from '../dtos/create-resource.dto';
-import { GetFilteredResources } from '../dtos/get-filtered-resources.dto';
-import { UpdateResourceDto } from '../dtos/update-resource.dto';
-import { ResourcesService } from '../services/resources.service';
-import { ResourcesCheckService } from '../services/resources-check.service';
 import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
@@ -20,7 +15,12 @@ import {
   ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
+import { CreateResourceDto } from '../dtos/create-resource.dto';
+import { GetFilteredResources } from '../dtos/get-filtered-resources.dto';
+import { UpdateResourceDto } from '../dtos/update-resource.dto';
 import { Resource } from '../entities/rosource.entity';
+import { ResourcesCheckService } from '../services/resources-check.service';
+import { ResourcesService } from '../services/resources.service';
 
 @ApiTags('Resources')
 @Controller('resources')
@@ -63,7 +63,7 @@ export class ResourcesController {
   @ApiNotFoundResponse()
   @Delete(':resourceId')
   async removeUser(@Param('resourceId') resourceId: string) {
-    return this.resourcesService.remove(resourceId);
+    return this.resourcesService.removeResource(resourceId);
   }
 
   @Get(':resourceId/check')

@@ -4,7 +4,7 @@ import { Resource } from '../../../../src/modules/resources/entities/rosource.en
 import { resourcesMock } from '../../data/resources';
 
 export class InMemoryResourceRepository {
-  private resources: Resource[] = resourcesMock.resources;
+  resources: Resource[] = resourcesMock.resources;
 
   async findAll() {
     return this.resources;
@@ -38,7 +38,8 @@ export class InMemoryResourceRepository {
   }
 
   async save(resource: Resource) {
-    return this.resources.push(resource);
+    this.resources.push(resource);
+    return resource;
   }
 
   async remove(resource: Resource) {

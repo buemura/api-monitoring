@@ -39,7 +39,7 @@ export class ResourcesService {
     return this.resourcesRepository.save(resource);
   }
 
-  async remove(id: string) {
+  async removeResource(id: string) {
     const resource = await this.resourcesRepository.findById(id);
     if (!resource) {
       throw new NotFoundException('Resource not found');
