@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Resource } from '../resources/entities/rosource.entity';
+import { Resource } from '../../modules/resources/entities/rosource.entity';
 
 @Module({
   imports: [

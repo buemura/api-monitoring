@@ -2,9 +2,9 @@ import axios from 'axios';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { ResourcesRepositoryImpl } from '../repositories/resources.repository.impl';
-import { getDateDiff } from '../../utils/date';
+import { getDateDiff } from '../../../shared/date';
 import { Resource } from '../entities/rosource.entity';
-import { WebsocketService } from '../../websocket/websocket.service';
+import { WebsocketService } from '../../../infra/websocket/websocket.service';
 
 @Injectable()
 export class ResourcesCheckService {

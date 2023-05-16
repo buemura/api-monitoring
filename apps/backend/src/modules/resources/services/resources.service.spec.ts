@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ResourcesService } from './resources.service';
 import { ResourcesRepositoryImpl } from '../repositories/resources.repository.impl';
-import { InMemoryResourceRepository } from '../../../test/__mocks__/repositories/in-memory/resource.repository';
-import { resourcesMock } from '../../../test/__mocks__/data/resources';
+import { InMemoryResourceRepository } from '../../../../test/__mocks__/repositories/in-memory/resource.repository';
+import { resourcesMock } from '../../../../test/__mocks__/data/resources';
 
 describe('ResourcesService', () => {
   let service: ResourcesService;
