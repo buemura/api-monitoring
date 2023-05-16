@@ -55,7 +55,7 @@ export class ResourcesCheckService {
     return this.checkAndUpdate(api);
   }
 
-  @Cron(CronExpression.EVERY_10_SECONDS)
+  @Cron(CronExpression.EVERY_5_SECONDS)
   async checkResourcesInBackground() {
     const apis = await this.resourcesRepository.findAll();
     const promises = apis.map(async (api) => {

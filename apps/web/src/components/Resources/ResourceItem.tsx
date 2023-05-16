@@ -4,6 +4,7 @@ import upIcon from "../../assets/up.png";
 import downIcon from "../../assets/down.png";
 import { resourcesService } from "../../services/http";
 import useWebsocket from "../../hooks/useWebsocket";
+import Timer from "../Common/Timer";
 
 type ResourceItemProps = {
   resource: Resource;
@@ -43,6 +44,13 @@ export default function ResourceItem({ resource }: ResourceItemProps) {
           <span>
             Check rate: {milisecondsToSeconds(resource.checkFrequency)}s
           </span>
+        </div>
+
+        <div className="pr-2">
+          <Timer
+            startTime={resource.lastCheck}
+            rate={resource.checkFrequency}
+          />
         </div>
 
         <button

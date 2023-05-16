@@ -18,14 +18,14 @@ Content-Type: application/json
 
 
 ### Update resource
-PATCH http://localhost:8080/api/resources/6eb43d5f-c9a1-449d-b97d-5d21879788ea
+PATCH http://localhost:8080/api/resources/556f9994-a380-405f-bd19-a380b0712982
 Content-Type: application/json
 
 {
-  "name": "user registration service",
-  "url": "http://localhost:3001",
-  "checkFrequency": 56400000,
-  "description": "user registration service",
+  "name": "Order service",
+  "url": "http://localhost:3002/api/health",
+  "checkFrequency": 15000,
+  "description": "Order service",
   "accessToken": "coffee"
 }
 
