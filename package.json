@@ -1,11 +1,15 @@
 {
   "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "husky": "^8.0.3",
     "turbo": "^1.9.6"
   },
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "start": "node apps/backend/dist/main"
+    "start": "node apps/backend/dist/main",
+    "prepare": "husky install"
   },
   "workspaces": [
     "apps/*"
