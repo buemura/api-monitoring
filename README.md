@@ -40,4 +40,9 @@ npm run dev
 
 ## Architecture Diagram
 
-![Diagram](./docs/diagram.png)
+![Diagram](./docs/assets/diagram.png)
+
+## Backlog
+
+See the mapped backlog for new features and fixes.
+[Backlog](https://github.com/buemura/api-monitoring/docs/backlog.md)
