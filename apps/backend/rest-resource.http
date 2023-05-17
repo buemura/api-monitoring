@@ -11,9 +11,9 @@ POST http://localhost:8080/api/resources
 Content-Type: application/json
 
 {
-    "name": "Order service",
-    "url": "http://localhost:3002/api/health",
-    "checkFrequency": 30000
+    "name": "Product List service",
+    "url": "http://localhost:3003/api/health",
+    "checkFrequency": 10000
 }
 
 

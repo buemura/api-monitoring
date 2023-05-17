@@ -3,7 +3,7 @@ import ResourceForm from "./components/Features/ResourceForm";
 
 export default function App() {
   return (
-    <div className="w-screen h-screen bg-neutral-200">
+    <div className="w-screen h-screen bg-neutral-200 p-4">
       <ResourceForm />
       <Resources />
     </div>

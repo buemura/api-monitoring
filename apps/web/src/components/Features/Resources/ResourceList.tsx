@@ -7,7 +7,7 @@ type ResourceListProps = {
 
 export default function ResourceList({ resources }: ResourceListProps) {
   return (
-    <div className="p-4">
+    <div>
       {resources.map((resource) => (
         <ResourceItem key={resource.id} resource={resource} />
       ))}

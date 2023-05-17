@@ -34,7 +34,7 @@ export default function ResourceItem({ resource: props }: ResourceItemProps) {
       key={resource.id}
       className="bg-white p-4 my-4 flex items-center justify-between"
     >
-      <div className="flex items-center">
+      <div className="flex w-1/3 items-center">
         <img
           className="w-10"
           alt="status"
@@ -43,7 +43,7 @@ export default function ResourceItem({ resource: props }: ResourceItemProps) {
         <span className="text-xl pl-6">{resource.name}</span>
       </div>
 
-      <div className="flex items-center">
+      <div className="flex w-2/3 items-center justify-between">
         <div className="flex flex-col pr-32 float-right">
           <span>
             Last checked:{" "}
@@ -54,19 +54,22 @@ export default function ResourceItem({ resource: props }: ResourceItemProps) {
           </span>
         </div>
 
-        <div className="pr-2">
-          <Timer
-            startTime={resource.lastCheck}
-            rate={resource.checkFrequency}
-          />
-        </div>
+        <div className="flex items-center">
+          <div className="pr-2 flex">
+            <span className="pr-2">Until next check: </span>
+            <Timer
+              startTime={resource.lastCheck}
+              rate={resource.checkFrequency}
+            />
+          </div>
 
-        <button
-          className="bg-blue-500 text-white p-1 rounded-md"
-          onClick={handleCheckResource}
-        >
-          Test Now
-        </button>
+          <button
+            className="bg-blue-500 text-white p-1 rounded-md"
+            onClick={handleCheckResource}
+          >
+            Test Now
+          </button>
+        </div>
       </div>
     </div>
   );
