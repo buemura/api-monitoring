@@ -31,4 +31,4 @@ Content-Type: application/json
 
 
 ### Delete resources by name
-DELETE http://localhost:8080/api/resources/10ce842a-b359-44b0-bde1-2cd72e370c09
+DELETE http://localhost:8080/api/resources/b86af1f8-baf0-46e6-99e6-6b1f0aa05b3a

@@ -1,6 +1,7 @@
+import { CreateResourceDto } from "../../dtos/create-resource-dto";
 import { Resource } from "../../types/resource";
 
-const baseUrl = "/api";
+const baseUrl = "http://localhost:8080/api";
 
 async function getAll(): Promise<Resource[]> {
   const res = await fetch(`${baseUrl}/resources`);
@@ -12,6 +13,17 @@ async function getById(id: string): Promise<Resource> {
   return res.json();
 }
 
+async function createResource(data: CreateResourceDto) {
+  const res = await fetch(`${baseUrl}/resources`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+}
+
 async function checkResource(resourceId: string): Promise<Resource> {
   const res = await fetch(`${baseUrl}/resources/${resourceId}/check`);
   return res.json();
@@ -20,5 +32,6 @@ async function checkResource(resourceId: string): Promise<Resource> {
 export const resourcesService = {
   getAll,
   getById,
+  createResource,
   checkResource,
 };

@@ -1,20 +1,36 @@
 import { useState } from "react";
 import LabelledInput from "../../Common/Inputs/LabelledInput";
+import { resourcesService } from "../../../services/http";
 
 export default function ResourceForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [checkFrequency, setCheckFrequency] = useState(0);
 
-  const handleResourceSubmit = (event: React.FormEvent) => {
+  const clearInputs = () => {
+    setName("");
+    setDescription("");
+    setUrl("");
+    setAccessToken("");
+    setCheckFrequency(0);
+  };
+
+  const handleResourceSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(name);
-    console.log(description);
-    console.log(url);
-    console.log(accessToken);
-    console.log(checkFrequency);
+    setIsLoading(true);
+    await resourcesService.createResource({
+      name,
+      description,
+      url,
+      accessToken,
+      checkFrequency,
+    });
+    setIsLoading(false);
+    clearInputs();
+    document.location.reload();
   };
 
   return (
@@ -29,7 +45,7 @@ export default function ResourceForm() {
           onChange={(event) => setName(event.target.value)}
         />
         <LabelledInput
-          label="Description"
+          label="Description (Optional)"
           inputType="text"
           name={description}
           placeholder="This API is responsible for user management"
@@ -44,7 +60,7 @@ export default function ResourceForm() {
           onChange={(event) => setUrl(event.target.value)}
         />
         <LabelledInput
-          label="Access token"
+          label="Access token (Optional)"
           inputType="text"
           name={accessToken}
           placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
@@ -60,10 +76,11 @@ export default function ResourceForm() {
         />
 
         <button
-          type="submit"
           className="bg-blue-500 text-white p-2 hover:bg-blue-600"
+          type="submit"
+          disabled={isLoading}
         >
-          Add
+          {isLoading ? "Loading..." : "Add"}
         </button>
       </form>
     </div>
