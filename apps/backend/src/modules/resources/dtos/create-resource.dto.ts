@@ -26,4 +26,9 @@ export class CreateResourceDto {
   @IsNotEmpty()
   @IsInt()
   checkFrequency: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  notifyTo: string;
 }

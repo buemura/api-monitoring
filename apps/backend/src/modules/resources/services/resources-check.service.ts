@@ -34,6 +34,11 @@ export class ResourcesCheckService {
 
     Object.assign(api, dataToSave);
     const result = await this.resourcesRepository.save(api);
+
+    if (dataToSave.status === 'Down') {
+      console.log(`Notify ${dataToSave.notifyTo}`);
+    }
+
     this.websocketProvider.handleEvent('resourceUpdate', result);
     return result;
   }
@@ -58,9 +63,7 @@ export class ResourcesCheckService {
   @Cron(CronExpression.EVERY_5_SECONDS)
   async checkResourcesInBackground() {
     const apis = await this.resourcesRepository.findAll();
-    const promises = apis.map(async (api) => {
-      await this.validateAndUpdate(api);
-    });
+    const promises = apis.map(async (api) => this.validateAndUpdate(api));
     await Promise.all(promises);
   }
 }

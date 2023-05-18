@@ -42,6 +42,10 @@ export class Resource {
   lastCheck: Date;
 
   @ApiProperty()
+  @Column()
+  notifyTo: string;
+
+  @ApiProperty()
   @CreateDateColumn()
   createdAt: Date;
 

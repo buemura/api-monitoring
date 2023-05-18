@@ -20,4 +20,8 @@ export class UpdateResourceDto {
   @IsOptional()
   @IsInt()
   checkFrequency: number;
+
+  @IsOptional()
+  @IsString()
+  notifyTo: string;
 }
