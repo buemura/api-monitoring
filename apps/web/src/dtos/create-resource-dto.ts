@@ -4,4 +4,5 @@ export interface CreateResourceDto {
   url: string;
   accessToken?: string;
   checkFrequency: number;
+  notifyTo: string;
 }

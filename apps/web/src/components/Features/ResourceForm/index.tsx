@@ -9,6 +9,7 @@ export default function ResourceForm() {
   const [url, setUrl] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [checkFrequency, setCheckFrequency] = useState(0);
+  const [notifyTo, setNotifyTo] = useState("");
 
   const clearInputs = () => {
     setName("");
@@ -16,6 +17,7 @@ export default function ResourceForm() {
     setUrl("");
     setAccessToken("");
     setCheckFrequency(0);
+    setNotifyTo("");
   };
 
   const handleResourceSubmit = async (event: React.FormEvent) => {
@@ -27,6 +29,7 @@ export default function ResourceForm() {
       url,
       accessToken,
       checkFrequency,
+      notifyTo,
     });
     setIsLoading(false);
     clearInputs();
@@ -35,6 +38,7 @@ export default function ResourceForm() {
 
   return (
     <div className="bg-white p-4">
+      <h1 className="text-2xl mb-2 tracking-wide font-light">Add new API</h1>
       <form className="flex flex-col gap-1" onSubmit={handleResourceSubmit}>
         <LabelledInput
           label="Name"
@@ -74,9 +78,17 @@ export default function ResourceForm() {
           required={true}
           onChange={(event) => setCheckFrequency(Number(event.target.value))}
         />
+        <LabelledInput
+          label="Notify To"
+          inputType="email"
+          name={notifyTo}
+          placeholder="john.doe@email.com"
+          required={true}
+          onChange={(event) => setNotifyTo(event.target.value)}
+        />
 
         <button
-          className="bg-blue-500 text-white p-2 hover:bg-blue-600"
+          className="bg-blue-500 text-white p-2 mt-2 hover:bg-blue-600"
           type="submit"
           disabled={isLoading}
         >

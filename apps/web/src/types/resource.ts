@@ -7,6 +7,7 @@ export interface Resource {
   checkFrequency: number;
   status: string;
   lastCheck: Date;
+  notifyTo: string;
   createdAt: Date;
   updatedAt: Date;
 }
