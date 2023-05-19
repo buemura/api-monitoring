@@ -63,6 +63,7 @@ describe('ResourcesService', () => {
         url: 'http://localhost:3001/api/health',
         accessToken: 'access_token',
         checkFrequency: 20000,
+        notifyTo: 'john@email.com',
       });
 
       expect(result?.name).toEqual('Product registration');
@@ -78,6 +79,7 @@ describe('ResourcesService', () => {
           url: 'http://localhost:3001/api/health',
           accessToken: 'access_token',
           checkFrequency: 20000,
+          notifyTo: 'john@email.com',
         }),
       ).rejects.toThrow('Resource not found');
     });
@@ -89,6 +91,7 @@ describe('ResourcesService', () => {
         url: 'http://localhost:3001/api/health',
         accessToken: 'access_token',
         checkFrequency: 20000,
+        notifyTo: 'john@email.com',
       });
       expect(resource.checkFrequency).toEqual(20000);
 
@@ -114,6 +117,7 @@ describe('ResourcesService', () => {
         url: 'http://localhost:3001/api/health',
         accessToken: 'access_token',
         checkFrequency: 20000,
+        notifyTo: 'john@email.com',
       });
 
       const before = await service.getById(resource.id);

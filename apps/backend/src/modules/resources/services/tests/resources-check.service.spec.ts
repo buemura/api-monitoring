@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
+import { WebsocketService } from '../../../../infra/websocket/websocket.service';
 import { InMemoryResourceRepository } from '../../../../../test/__mocks__/repositories/in-memory/resource.repository';
 import { FakeWebsocketService } from '../../../../../test/__mocks__/services/fake-websocket.service';
-import { WebsocketService } from '../../../../infra/websocket/websocket.service';
 import { ResourcesRepositoryImpl } from '../../repositories/resources.repository.impl';
 import { ResourcesCheckService } from '../resources-check.service';
 

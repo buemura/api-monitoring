@@ -3,7 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Admin')
 @Controller('health')
-export class AppController {
+export class AdminController {
   @Get()
   checkHealth(): string {
     return 'OK';
