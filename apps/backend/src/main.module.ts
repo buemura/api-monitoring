@@ -6,12 +6,14 @@ import { AppController } from './modules/app/app.controller';
 import { ResourcesModule } from './modules/resources/resources.module';
 import { DatabaseModule } from './infra/database/database.module';
 import { WebsocketModule } from './infra/websocket/websocket.module';
+import { MessagingModule } from './infra/messaging/messaging.module';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
     WebsocketModule,
     DatabaseModule,
+    MessagingModule,
     ResourcesModule,
   ],
   controllers: [AppController],

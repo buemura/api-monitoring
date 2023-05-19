@@ -5,12 +5,14 @@ import { ResourcesRepositoryImpl } from '../repositories/resources.repository.im
 import { getDateDiff } from '../../../shared/date';
 import { Resource } from '../entities/rosource.entity';
 import { WebsocketService } from '../../../infra/websocket/websocket.service';
+import { ProducerService } from '../../../infra/messaging/producer/producer.service';
 
 @Injectable()
 export class ResourcesCheckService {
   constructor(
     private readonly resourcesRepository: ResourcesRepositoryImpl,
     private readonly websocketProvider: WebsocketService,
+    private readonly producerService: ProducerService,
   ) {}
 
   private async checkAndUpdate(api: Resource) {
@@ -36,7 +38,7 @@ export class ResourcesCheckService {
     const result = await this.resourcesRepository.save(api);
 
     if (dataToSave.status === 'Down') {
-      console.log(`Notify ${dataToSave.notifyTo}`);
+      this.producerService.sendMessage('notify-api-down', result);
     }
 
     this.websocketProvider.handleEvent('resourceUpdate', result);

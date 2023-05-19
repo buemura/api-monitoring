@@ -6,9 +6,14 @@ import { ResourcesService } from './services/resources.service';
 import { ResourcesRepositoryImpl } from './repositories/resources.repository.impl';
 import { ResourcesCheckService } from './services/resources-check.service';
 import { WebsocketModule } from '../../infra/websocket/websocket.module';
+import { MessagingModule } from '../../infra/messaging/messaging.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Resource]), WebsocketModule],
+  imports: [
+    TypeOrmModule.forFeature([Resource]),
+    WebsocketModule,
+    MessagingModule,
+  ],
   controllers: [ResourcesController],
   providers: [ResourcesService, ResourcesCheckService, ResourcesRepositoryImpl],
 })
