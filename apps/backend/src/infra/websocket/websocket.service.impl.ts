@@ -4,7 +4,7 @@ import { Server } from 'socket.io';
 
 @Injectable()
 @WebSocketGateway(8081, { cors: '*' })
-export class WebsocketService {
+export class WebsocketServiceImpl {
   @WebSocketServer()
   server: Server;
 

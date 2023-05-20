@@ -3,10 +3,10 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
 import { getDateDiff } from '../../../shared/date';
-import { WebsocketService } from '../../../infra/websocket/websocket.service';
 import { ProducerService } from '../../../infra/messaging/producer/producer.service';
 import { ResourcesRepositoryImpl } from '../../../infra/database/typeorm/repositories/resources.repository.impl';
-import { TypeOrmResourceEntity } from '../../../infra/database/typeorm/entities/resource.entity';
+import { Resource } from '../entities/resource';
+import { WebsocketService } from '../../../application/services/websocket.service';
 
 @Injectable()
 export class ResourcesCheckService {
@@ -16,7 +16,7 @@ export class ResourcesCheckService {
     private readonly producerService: ProducerService,
   ) {}
 
-  private async checkAndUpdate(api: TypeOrmResourceEntity) {
+  private async checkAndUpdate(api: Resource) {
     console.log(`Checking API ${api.id}`);
     const dataToSave = {
       ...api,
@@ -46,7 +46,7 @@ export class ResourcesCheckService {
     return result;
   }
 
-  private async validateAndUpdate(api: TypeOrmResourceEntity) {
+  private async validateAndUpdate(api: Resource) {
     const diff = getDateDiff(new Date(), api.updatedAt);
     if (diff < api.checkFrequency) {
       console.log(`Skipping API ${api.id}`);
