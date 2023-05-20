@@ -1,10 +1,11 @@
+import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
+import { INestApplication } from '@nestjs/common';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+function setupMiddlewares(app: INestApplication) {
   app.enableCors();
   app.setGlobalPrefix('api');
 
@@ -15,6 +16,11 @@ async function bootstrap() {
       port: 6379,
     },
   });
+}
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  setupMiddlewares(app);
 
   const config = new DocumentBuilder()
     .setTitle('API Monitoring Service')
@@ -31,4 +37,5 @@ async function bootstrap() {
   await app.startAllMicroservices();
   await app.listen(8080);
 }
+
 bootstrap();

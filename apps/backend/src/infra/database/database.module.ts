@@ -1,16 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { Resource } from '../../modules/resources/entities/rosource.entity';
+import { dataSourceOptions } from './typeorm/data-source';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'dev.sqlite',
-      entities: [Resource],
-      synchronize: true,
-    }),
-  ],
+  imports: [TypeOrmModule.forRoot(dataSourceOptions)],
 })
 export class DatabaseModule {}

@@ -26,11 +26,11 @@ export class Resource {
   url: string;
 
   @ApiProperty()
-  @Column({ nullable: true })
+  @Column({ nullable: true, name: 'access_token' })
   accessToken: string;
 
   @ApiProperty()
-  @Column()
+  @Column({ name: 'check_frequency' })
   checkFrequency: number;
 
   @ApiProperty()
@@ -38,18 +38,18 @@ export class Resource {
   status: string;
 
   @ApiProperty()
-  @Column({ nullable: true })
+  @Column({ type: 'timestamptz', name: 'last_checked', default: new Date() })
   lastCheck: Date;
 
   @ApiProperty()
-  @Column()
+  @Column({ name: 'notify_to' })
   notifyTo: string;
 
   @ApiProperty()
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'timestamptz', name: 'created_at' })
   createdAt: Date;
 
   @ApiProperty()
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: 'timestamptz', name: 'updated_at' })
   updatedAt: Date;
 }

@@ -13,7 +13,8 @@ Content-Type: application/json
 {
     "name": "Product List service",
     "url": "http://localhost:3003/api/health",
-    "checkFrequency": 10000
+    "checkFrequency": 10000,
+    "notifyTo": "john.doe@email.com"
 }
 
 
