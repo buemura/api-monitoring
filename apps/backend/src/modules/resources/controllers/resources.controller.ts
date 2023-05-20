@@ -18,7 +18,7 @@ import {
 import { CreateResourceDto } from '../dtos/create-resource.dto';
 import { GetFilteredResources } from '../dtos/get-filtered-resources.dto';
 import { UpdateResourceDto } from '../dtos/update-resource.dto';
-import { Resource } from '../entities/rosource.entity';
+import { Resource } from '../entities/resource.entity';
 import { ResourcesCheckService } from '../services/resources-check.service';
 import { ResourcesService } from '../services/resources.service';
 
