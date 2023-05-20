@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:latest
+    container_name: api-monitoring-redis
+    ports:
+      - 6379:6379
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - app-tier
+
+  postgres:
+    image: postgres:latest
+    container_name: api-monitoring-backend-postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
+    volumes:
+      - ./data/pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-tier
+
+  mongodb:
+    image: mongo:latest
+    container_name: api-monitoring-notifications-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongodb:/data/db
+    networks:
+      - app-tier
+
+networks:
+  app-tier:
+    driver: bridge
+
+volumes:
+  postgres-db:
+    driver: local
