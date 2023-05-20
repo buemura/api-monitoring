@@ -18,7 +18,7 @@ import {
 import { CreateResourceDto } from '../dtos/create-resource.dto';
 import { GetFilteredResources } from '../dtos/get-filtered-resources.dto';
 import { UpdateResourceDto } from '../dtos/update-resource.dto';
-import { Resource } from '../entities/resource.entity';
+import { TypeOrmResourceEntity } from '../../../infra/database/typeorm/entities/resource.entity';
 import { ResourcesCheckService } from '../services/resources-check.service';
 import { ResourcesService } from '../services/resources.service';
 
@@ -30,26 +30,26 @@ export class ResourcesController {
     private readonly resourcesCheckService: ResourcesCheckService,
   ) {}
 
-  @ApiOkResponse({ type: Resource, isArray: true })
+  @ApiOkResponse({ type: TypeOrmResourceEntity, isArray: true })
   @ApiQuery({ name: 'name', required: false })
   @Get()
   async getResources(@Query() query: GetFilteredResources) {
     return this.resourcesService.getResources(query);
   }
 
-  @ApiOkResponse({ type: Resource })
+  @ApiOkResponse({ type: TypeOrmResourceEntity })
   @Get(':resourceId')
   async getResourceById(@Param('resourceId') resourceId: string) {
     return this.resourcesService.getById(resourceId);
   }
 
-  @ApiCreatedResponse({ type: Resource })
+  @ApiCreatedResponse({ type: TypeOrmResourceEntity })
   @Post()
   async addResource(@Body() body: CreateResourceDto) {
     return this.resourcesService.createResource(body);
   }
 
-  @ApiOkResponse({ type: Resource })
+  @ApiOkResponse({ type: TypeOrmResourceEntity })
   @ApiNotFoundResponse()
   @Patch(':resourceId')
   async updateResource(
@@ -59,7 +59,7 @@ export class ResourcesController {
     return this.resourcesService.updateResource(resourceId, body);
   }
 
-  @ApiOkResponse({ type: Resource })
+  @ApiOkResponse({ type: TypeOrmResourceEntity })
   @ApiNotFoundResponse()
   @Delete(':resourceId')
   async removeUser(@Param('resourceId') resourceId: string) {

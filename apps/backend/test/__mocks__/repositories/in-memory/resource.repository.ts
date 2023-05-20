@@ -1,10 +1,10 @@
 import { randomUUID } from 'crypto';
 import { CreateResourceDto } from '../../../../src/modules/resources/dtos/create-resource.dto';
-import { Resource } from '../../../../src/modules/resources/entities/resource.entity';
+import { TypeOrmResourceEntity } from '../../../../src/infra/database/typeorm/entities/resource.entity';
 import { resourcesMock } from '../../data/resources';
 
 export class InMemoryResourceRepository {
-  resources: Resource[] = resourcesMock.resources;
+  resources: TypeOrmResourceEntity[] = resourcesMock.resources;
 
   async findAll() {
     return this.resources;
@@ -23,7 +23,7 @@ export class InMemoryResourceRepository {
   }
 
   create(body: CreateResourceDto) {
-    const resource = new Resource();
+    const resource = new TypeOrmResourceEntity();
     resource.id = randomUUID();
     resource.name = body.name;
     resource.description = body.description || null;
@@ -37,12 +37,12 @@ export class InMemoryResourceRepository {
     return resource;
   }
 
-  async save(resource: Resource) {
+  async save(resource: TypeOrmResourceEntity) {
     this.resources.push(resource);
     return resource;
   }
 
-  async remove(resource: Resource) {
+  async remove(resource: TypeOrmResourceEntity) {
     const index = this.resources.findIndex((res) => res === resource);
     this.resources.splice(index, 1);
     return resource;

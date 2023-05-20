@@ -3,7 +3,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateResourceDto } from '../dtos/create-resource.dto';
 import { GetFilteredResources } from '../dtos/get-filtered-resources.dto';
 import { UpdateResourceDto } from '../dtos/update-resource.dto';
-import { ResourcesRepositoryImpl } from '../repositories/resources.repository.impl';
+import { ResourcesRepositoryImpl } from '../../../infra/database/typeorm/repositories/resources.repository.impl';
 
 @Injectable()
 export class ResourcesService {

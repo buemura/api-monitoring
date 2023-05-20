@@ -6,9 +6,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Resource } from '../../../../modules/resources/entities/resource';
 
-@Entity()
-export class Resource {
+@Entity({ name: 'resource' })
+export class TypeOrmResourceEntity extends Resource {
   @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
   id: string;
