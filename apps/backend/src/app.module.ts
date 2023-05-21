@@ -7,9 +7,14 @@ import { ResourcesModule } from './modules/resources/resources.module';
 import { DatabaseModule } from './infra/database/database.module';
 import { WebsocketModule } from './infra/websocket/websocket.module';
 import { MessagingModule } from './infra/messaging/messaging.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: './.env',
+    }),
     ScheduleModule.forRoot(),
     WebsocketModule,
     DatabaseModule,

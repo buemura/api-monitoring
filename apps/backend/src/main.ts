@@ -1,19 +1,22 @@
 import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { Transport } from '@nestjs/microservices';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 import { INestApplication } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 function setupMiddlewares(app: INestApplication) {
+  const configService = app.get(ConfigService);
+
   app.enableCors();
   app.setGlobalPrefix('api');
 
-  app.connectMicroservice({
+  app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.REDIS,
     options: {
-      host: 'localhost',
-      port: 6379,
+      host: configService.get('REDIS_HOST'),
+      port: configService.get('REDIS_PORT'),
     },
   });
 }
