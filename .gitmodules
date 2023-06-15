@@ -1,0 +1,9 @@
+[submodule "api-monitoring-notifications"]
+	path = api-monitoring-notifications
+	url = https://github.com/buemura/api-monitoring-notifications.git
+[submodule "api-monitoring-backend"]
+	path = api-monitoring-backend
+	url = https://github.com/buemura/api-monitoring-backend.git
+[submodule "api-monitoring-frontend"]
+	path = api-monitoring-frontend
+	url = https://github.com/buemura/api-monitoring-frontend.git
