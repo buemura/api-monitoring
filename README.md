@@ -5,6 +5,7 @@ This app monitors registered APIs health
 - [Technologies](#technologies)
   - [Frontend](#frontend)
   - [Backend](#backend)
+  - [Notifications](#notifications)
 - [Setup](#setup)
 - [Architecture diagram](#architecture-diagram)
 
@@ -23,6 +24,12 @@ This app monitors registered APIs health
 - NestJS
 - TypeScript
 - TypeORM
+
+### Notifications
+
+- Node.js
+- NestJS
+- TypeScript
 
 ## Setup
 
