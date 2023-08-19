@@ -2,11 +2,20 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "turbo": "^1.9.6"
   },
   "scripts": {
+    "test": "turbo run test",
+    "build": "turbo run build",
+    "start:dev": "turbo run start:dev  --no-cache  --continue",
+    "start": "node apps/backend/dist/main",
     "prepare": "husky install",
-    "docker:up": "docker-compose build && docker compose up -d",
-    "docker:down": "docker compose down"
-  }
+    "env:up": "docker-compose build && docker compose up -d",
+    "env:down": "docker-compose down"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

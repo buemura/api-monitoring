@@ -1,0 +1,35 @@
+### Get resources
+GET http://localhost:8080/api/resources
+
+
+### Get resources by name
+GET http://localhost:8080/api/resources?name=User%20re
+
+
+### Create resource
+POST http://localhost:8080/api/resources
+Content-Type: application/json
+
+{
+    "name": "Product List service",
+    "url": "http://localhost:3003/api/health",
+    "checkFrequency": 10000,
+    "notifyTo": "john.doe@email.com"
+}
+
+
+### Update resource
+PATCH http://localhost:8080/api/resources/556f9994-a380-405f-bd19-a380b0712982
+Content-Type: application/json
+
+{
+  "name": "Order service",
+  "url": "http://localhost:3002/api/health",
+  "checkFrequency": 15000,
+  "description": "Order service",
+  "accessToken": "coffee"
+}
+
+
+### Delete resources by name
+DELETE http://localhost:8080/api/resources/b86af1f8-baf0-46e6-99e6-6b1f0aa05b3a

@@ -5,7 +5,6 @@ This app monitors registered APIs health
 - [Technologies](#technologies)
   - [Frontend](#frontend)
   - [Backend](#backend)
-  - [Notifications](#notifications)
 - [Setup](#setup)
 - [Architecture diagram](#architecture-diagram)
 
@@ -25,24 +24,18 @@ This app monitors registered APIs health
 - TypeScript
 - TypeORM
 
-### Notifications
-
-- Node.js
-- NestJS
-- TypeScript
-
 ## Setup
 
-1. Clone the repository with the command below:
-
-```bash
-git clone --recurse-submodules https://github.com/buemura/api-monitoring.git
-```
-
-2. Install the dependencies
+1. Install the dependencies
 
 ```bash
 npm install
+```
+
+2. Run the application
+
+```bash
+npm run dev
 ```
 
 ## Architecture Diagram
