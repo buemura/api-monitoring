@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
 import { getDateDiff } from '../../../shared/date';
@@ -10,14 +10,18 @@ import { WebsocketService } from '../../websocket/websocket.service';
 
 @Injectable()
 export class ResourcesCheckService {
+  private logger: Logger;
+
   constructor(
     private readonly resourcesRepository: ResourcesRepositoryImpl,
     private readonly websocketProvider: WebsocketService,
     private readonly producerService: ProducerService,
-  ) {}
+  ) {
+    this.logger = new Logger(ResourcesCheckService.name);
+  }
 
   private async checkAndUpdate(api: Resource) {
-    console.log(`Checking API ${api.id}`);
+    this.logger.log(`Checking API ${api.id}`);
     const dataToSave = {
       ...api,
       lastCheck: new Date(),
@@ -29,17 +33,25 @@ export class ResourcesCheckService {
         throw new Error();
       }
       dataToSave.status = 'Up';
-      console.log(`API ${api.id} is UP`);
+      this.logger.log(`API ${api.id} is UP`);
     } catch (error) {
       dataToSave.status = 'Down';
-      console.log(`API ${api.id} is DOWN`);
+      this.logger.log(`API ${api.id} is DOWN`);
     }
 
     Object.assign(api, dataToSave);
     const result = await this.resourcesRepository.save(api);
 
     if (dataToSave.status === 'Down') {
-      this.producerService.sendMessage('notify-api-down', result);
+      this.producerService.sendMessage('notify-api-down', {
+        id: result.id,
+        name: result.name,
+        description: result.description,
+        url: result.url,
+        status: result.status,
+        lastCheck: result.lastCheck,
+        notifyTo: result.notifyTo,
+      });
     }
 
     this.websocketProvider.handleEvent('resourceUpdate', result);
@@ -49,7 +61,7 @@ export class ResourcesCheckService {
   private async validateAndUpdate(api: Resource) {
     const diff = getDateDiff(new Date(), api.updatedAt);
     if (diff < api.checkFrequency) {
-      console.log(`Skipping API ${api.id}`);
+      this.logger.log(`Skipping API ${api.id}`);
       return;
     }
     return this.checkAndUpdate(api);

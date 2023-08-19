@@ -1,12 +1,16 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class ProducerService {
-  constructor(@Inject('BACKEND_SERVICE') private client: ClientProxy) {}
+  private logger: Logger;
+
+  constructor(@Inject('BACKEND_SERVICE') private client: ClientProxy) {
+    this.logger = new Logger();
+  }
 
   sendMessage(pattern: string, message: any) {
-    console.log('Message sent:', {
+    this.logger.log('Message sent:', {
       pattern,
       message,
     });
