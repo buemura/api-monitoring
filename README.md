@@ -12,7 +12,7 @@ This app monitors registered APIs health
 
 ### Frontend
 
-- Vitejs
+- Vite.js
 - React
 - TypeScript
 - TailwindCSS
@@ -23,6 +23,7 @@ This app monitors registered APIs health
 - NestJS
 - TypeScript
 - TypeORM
+- Redis
 
 ## Setup
 
@@ -35,7 +36,7 @@ npm install
 2. Run the application
 
 ```bash
-npm run dev
+npm run start:dev
 ```
 
 ## Architecture Diagram
