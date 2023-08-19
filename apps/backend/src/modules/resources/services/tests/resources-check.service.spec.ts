@@ -4,7 +4,7 @@ import { InMemoryResourceRepository } from '../../../../../test/__mocks__/reposi
 import { FakeWebsocketService } from '../../../../../test/__mocks__/services/fake-websocket.service';
 import { ResourcesRepositoryImpl } from '../../../../infra/database/typeorm/repositories/resources.repository.impl';
 import { ResourcesCheckService } from '../resources-check.service';
-import { WebsocketService } from '../../../../application/services/websocket.service';
+import { WebsocketService } from '../../../websocket/websocket.service';
 
 describe('ResourcesCheckService', () => {
   let service: ResourcesCheckService;

@@ -6,7 +6,7 @@ import { getDateDiff } from '../../../shared/date';
 import { ProducerService } from '../../../infra/messaging/producer/producer.service';
 import { ResourcesRepositoryImpl } from '../../../infra/database/typeorm/repositories/resources.repository.impl';
 import { Resource } from '../entities/resource';
-import { WebsocketService } from '../../../application/services/websocket.service';
+import { WebsocketService } from '../../websocket/websocket.service';
 
 @Injectable()
 export class ResourcesCheckService {

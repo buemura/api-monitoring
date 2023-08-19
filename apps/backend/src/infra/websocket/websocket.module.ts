@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { WebsocketServiceImpl } from './websocket.service.impl';
-import { WebsocketService } from '../../application/services/websocket.service';
+import { WebsocketServiceImpl } from './socketio/websocket.service.impl';
+import { WebsocketService } from '../../modules/websocket/websocket.service';
 
 @Module({
   providers: [
