@@ -1,7 +1,7 @@
 import { CreateResourceDto } from "../../dtos/create-resource-dto";
 import { Resource } from "../../types/resource";
 
-const baseUrl = "http://localhost:8080/api";
+const baseUrl = "/api";
 
 async function getAll(): Promise<Resource[]> {
   const res = await fetch(`${baseUrl}/resources`);
