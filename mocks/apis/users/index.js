@@ -1,9 +1,12 @@
-const express = require("express");
+import { createServer } from "node:http";
 
-const app = express();
-
-app.get("/health", (_request, response) => {
-  response.send("ok");
+const server = createServer(function (req, res) {
+  if (req.url === "/health") {
+    res.writeHead(200);
+    res.end("ok");
+  }
 });
 
-app.listen(9001, () => console.log("User API running..."));
+server.listen(9001, () => {
+  console.log(`User API is running on http://localhost:9001`);
+});

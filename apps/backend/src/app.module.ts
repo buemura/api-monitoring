@@ -1,15 +1,14 @@
-import { Module, ValidationPipe } from '@nestjs/common';
-import { APP_PIPE } from '@nestjs/core';
-import { ScheduleModule } from '@nestjs/schedule';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
-import { AdminController } from './modules/admin/admin.controller';
-import { ResourcesModule } from './modules/resources/resources.module';
 import { DatabaseModule } from './infra/database/database.module';
-import { WebsocketModule } from './infra/websocket/websocket.module';
 import { MessagingModule } from './infra/messaging/messaging.module';
+import { WebsocketModule } from './infra/websocket/websocket.module';
+import { HealthModule } from './modules/health/health.module';
+import { ResourcesModule } from './modules/resources/resources.module';
 
 @Module({
   imports: [
@@ -24,16 +23,8 @@ import { MessagingModule } from './infra/messaging/messaging.module';
     WebsocketModule,
     DatabaseModule,
     MessagingModule,
+    HealthModule,
     ResourcesModule,
-  ],
-  controllers: [AdminController],
-  providers: [
-    {
-      provide: APP_PIPE,
-      useValue: new ValidationPipe({
-        whitelist: true,
-      }),
-    },
   ],
 })
 export class AppModule {}
