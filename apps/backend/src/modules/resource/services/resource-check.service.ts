@@ -1,19 +1,19 @@
-import axios from 'axios';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import axios from 'axios';
 
-import { getDateDiff } from '../../../shared/date';
-import { ProducerService } from '../../../infra/messaging/producer/producer.service';
-import { ResourcesRepositoryImpl } from '../../../infra/database/typeorm/repositories/resources.repository.impl';
+import { ResourceRepositoryImpl } from '@infra/database/typeorm/repositories/resources.repository.impl';
+import { ProducerService } from '@infra/messaging/producer/producer.service';
+import { WebsocketService } from '@modules/websocket/websocket.service';
+import { getDateDiff } from '@shared/date';
 import { Resource } from '../entities/resource';
-import { WebsocketService } from '../../websocket/websocket.service';
 
 @Injectable()
 export class ResourcesCheckService {
   private logger: Logger;
 
   constructor(
-    private readonly resourcesRepository: ResourcesRepositoryImpl,
+    private readonly resourcesRepository: ResourceRepositoryImpl,
     private readonly websocketProvider: WebsocketService,
     private readonly producerService: ProducerService,
   ) {

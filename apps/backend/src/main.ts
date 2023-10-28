@@ -1,10 +1,11 @@
 import 'dotenv/config';
-import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { AppModule } from './app.module';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
+import { AppModule } from '@infra/app.module';
 
 function setupMiddlewares(app: INestApplication) {
   const configService = app.get(ConfigService);
@@ -24,11 +25,6 @@ function setupMiddlewares(app: INestApplication) {
       port: configService.get('REDIS_PORT'),
     },
   });
-}
-
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  setupMiddlewares(app);
 
   const config = new DocumentBuilder()
     .setTitle('API Monitoring Service')
@@ -41,9 +37,15 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
 
   SwaggerModule.setup('/api/docs', app, document);
+}
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  setupMiddlewares(app);
 
   await app.startAllMicroservices();
   await app.listen(8080);
 }
 
-bootstrap();
+bootstrap().then(() => console.log('Backend Running on port 8080...'));

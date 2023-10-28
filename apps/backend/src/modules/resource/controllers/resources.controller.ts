@@ -15,18 +15,19 @@ import {
   ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
+
+import { TypeOrmResourceEntity } from '@infra/database/typeorm/entities/resource.entity';
 import { CreateResourceDto } from '../dtos/create-resource.dto';
 import { GetFilteredResources } from '../dtos/get-filtered-resources.dto';
 import { UpdateResourceDto } from '../dtos/update-resource.dto';
-import { TypeOrmResourceEntity } from '../../../infra/database/typeorm/entities/resource.entity';
-import { ResourcesCheckService } from '../services/resources-check.service';
-import { ResourcesService } from '../services/resources.service';
+import { ResourcesCheckService } from '../services/resource-check.service';
+import { ResourceService } from '../services/resource.service';
 
 @ApiTags('Resources')
 @Controller('resources')
-export class ResourcesController {
+export class ResourceController {
   constructor(
-    private readonly resourcesService: ResourcesService,
+    private readonly resourcesService: ResourceService,
     private readonly resourcesCheckService: ResourcesCheckService,
   ) {}
 

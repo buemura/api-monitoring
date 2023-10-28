@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Like, Repository } from 'typeorm';
 
+import { CreateResourceDto } from '@modules/resource/dtos/create-resource.dto';
+import { ResourceRepository } from '@modules/resource/repositories/resource.repository';
 import { TypeOrmResourceEntity } from '../entities/resource.entity';
-import { CreateResourceDto } from '../../../../modules/resources/dtos/create-resource.dto';
-import { ResourcesRepository } from '../../../../modules/resources/repositories/resource.repository';
 
 @Injectable()
-export class ResourcesRepositoryImpl implements ResourcesRepository {
+export class ResourceRepositoryImpl implements ResourceRepository {
   constructor(
     @InjectRepository(TypeOrmResourceEntity)
     private readonly repository: Repository<TypeOrmResourceEntity>,

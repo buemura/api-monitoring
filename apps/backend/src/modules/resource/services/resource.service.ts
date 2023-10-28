@@ -1,51 +1,51 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
+import { ResourceRepositoryImpl } from '@infra/database/typeorm/repositories/resources.repository.impl';
 import { CreateResourceDto } from '../dtos/create-resource.dto';
 import { GetFilteredResources } from '../dtos/get-filtered-resources.dto';
 import { UpdateResourceDto } from '../dtos/update-resource.dto';
-import { ResourcesRepositoryImpl } from '../../../infra/database/typeorm/repositories/resources.repository.impl';
 
 @Injectable()
-export class ResourcesService {
-  constructor(private readonly resourcesRepository: ResourcesRepositoryImpl) {}
+export class ResourceService {
+  constructor(private readonly resourceRepository: ResourceRepositoryImpl) {}
 
   async getResources(query: GetFilteredResources) {
     if (query.name) {
-      return this.resourcesRepository.findLikeName(query.name);
+      return this.resourceRepository.findLikeName(query.name);
     }
 
-    return this.resourcesRepository.findAll();
+    return this.resourceRepository.findAll();
   }
 
   async getById(id: string) {
-    return this.resourcesRepository.findById(id);
+    return this.resourceRepository.findById(id);
   }
 
   async getByName(name: string) {
-    return this.resourcesRepository.findByName(name);
+    return this.resourceRepository.findByName(name);
   }
 
   async createResource(body: CreateResourceDto) {
-    const resource = this.resourcesRepository.create(body);
-    return this.resourcesRepository.save(resource);
+    const resource = this.resourceRepository.create(body);
+    return this.resourceRepository.save(resource);
   }
 
   async updateResource(id: string, body: UpdateResourceDto) {
-    const resource = await this.resourcesRepository.findById(id);
+    const resource = await this.resourceRepository.findById(id);
     if (!resource) {
       throw new NotFoundException('Resource not found');
     }
 
     Object.assign(resource, body);
-    return this.resourcesRepository.save(resource);
+    return this.resourceRepository.save(resource);
   }
 
   async removeResource(id: string) {
-    const resource = await this.resourcesRepository.findById(id);
+    const resource = await this.resourceRepository.findById(id);
     if (!resource) {
       throw new NotFoundException('Resource not found');
     }
 
-    return this.resourcesRepository.remove(resource);
+    return this.resourceRepository.remove(resource);
   }
 }

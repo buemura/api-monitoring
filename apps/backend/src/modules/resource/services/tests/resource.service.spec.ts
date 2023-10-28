@@ -1,23 +1,24 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
+import { ResourceRepositoryImpl } from '@infra/database/typeorm/repositories/resources.repository.impl';
 import { resourcesMock } from '../../../../../test/__mocks__/data/resources';
 import { InMemoryResourceRepository } from '../../../../../test/__mocks__/repositories/in-memory/resource.repository';
-import { ResourcesRepositoryImpl } from '../../../../infra/database/typeorm/repositories/resources.repository.impl';
-import { ResourcesService } from '../resources.service';
+import { ResourceService } from '../resource.service';
 
 describe('ResourcesService', () => {
-  let service: ResourcesService;
+  let service: ResourceService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        ResourcesService,
+        ResourceService,
         {
-          provide: ResourcesRepositoryImpl,
+          provide: ResourceRepositoryImpl,
           useClass: InMemoryResourceRepository,
         },
       ],
     }).compile();
-    service = module.get<ResourcesService>(ResourcesService);
+    service = module.get<ResourceService>(ResourceService);
   });
 
   it('should be defined', () => {

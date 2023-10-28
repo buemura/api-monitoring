@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { CreateResourceDto } from '../../../../src/modules/resources/dtos/create-resource.dto';
+import { CreateResourceDto } from '../../../../src/modules/resource/dtos/create-resource.dto';
 import { TypeOrmResourceEntity } from '../../../../src/infra/database/typeorm/entities/resource.entity';
 import { resourcesMock } from '../../data/resources';
 

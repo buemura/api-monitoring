@@ -12,7 +12,8 @@
     "start": "node apps/backend/dist/main",
     "prepare": "husky install",
     "env:up": "docker-compose build && docker compose up -d",
-    "env:down": "docker-compose down"
+    "env:down": "docker-compose down",
+    "migration:run": "npm run typeorm -- migration:run"
   },
   "workspaces": [
     "apps/*",

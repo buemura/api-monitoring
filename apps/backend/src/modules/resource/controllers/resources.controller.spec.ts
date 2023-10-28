@@ -1,11 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ResourcesCheckService } from '../services/resources-check.service';
-import { ResourcesService } from '../services/resources.service';
-import { ResourcesController } from './resources.controller';
+
+import { ResourcesCheckService } from '../services/resource-check.service';
+import { ResourceService } from '../services/resource.service';
+import { ResourceController } from './resources.controller';
 
 describe('ResourceController', () => {
-  let controller: ResourcesController;
-  let resourcesServiceMock: Partial<ResourcesService>;
+  let controller: ResourceController;
+  let resourcesServiceMock: Partial<ResourceService>;
   let resourcesCheckServiceMock: Partial<ResourcesCheckService>;
 
   beforeEach(async () => {
@@ -23,10 +24,10 @@ describe('ResourceController', () => {
     };
 
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [ResourcesController],
+      controllers: [ResourceController],
       providers: [
         {
-          provide: ResourcesService,
+          provide: ResourceService,
           useValue: resourcesServiceMock,
         },
         {
@@ -36,7 +37,7 @@ describe('ResourceController', () => {
       ],
     }).compile();
 
-    controller = module.get<ResourcesController>(ResourcesController);
+    controller = module.get<ResourceController>(ResourceController);
   });
 
   it('should be defined', () => {

@@ -4,16 +4,16 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
-import { DatabaseModule } from './infra/database/database.module';
-import { MessagingModule } from './infra/messaging/messaging.module';
-import { WebsocketModule } from './infra/websocket/websocket.module';
-import { HealthModule } from './modules/health/health.module';
-import { ResourcesModule } from './modules/resources/resources.module';
+import { DatabaseModule } from '@infra/database';
+import { MessagingModule } from '@infra/messaging';
+import { WebsocketModule } from '@infra/websocket';
+import { HealthModule } from '@modules/health';
+import { ResourceModule } from '@modules/resource';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../', 'web/dist'),
+      rootPath: join(__dirname, '../../../', 'web/dist'),
     }),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -24,7 +24,7 @@ import { ResourcesModule } from './modules/resources/resources.module';
     DatabaseModule,
     MessagingModule,
     HealthModule,
-    ResourcesModule,
+    ResourceModule,
   ],
 })
 export class AppModule {}

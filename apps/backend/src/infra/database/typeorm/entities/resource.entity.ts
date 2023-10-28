@@ -6,7 +6,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Resource } from '../../../../modules/resources/entities/resource';
+
+import { Resource } from '@modules/resource/entities/resource';
 
 @Entity({ name: 'resource' })
 export class TypeOrmResourceEntity extends Resource {
